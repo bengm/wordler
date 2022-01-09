@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1.0"
+    />
+    <title>Wordler</title>
+
+    <!-- CSS  -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="css/materialize.css"
+      type="text/css"
+      rel="stylesheet"
+      media="screen,projection"
+    />
+    <link
+      href="css/style.css"
+      type="text/css"
+      rel="stylesheet"
+      media="screen,projection"
+    />
+  </head>
+  <body>
+    <nav class="grey darken-3" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo">Wordler</a>
+      </div>
+    </nav>
+    <div class="section no-pad-bot" id="index-banner">
+      <!-- Form Section -->
+      <div class="container">
+        <br /><br />
+
+        <form>
+          <div class="row">
+            <div class="col s5">
+              <h5>Known-Position Letters</h5>
+              <div class="row center">
+                <div class="col s2">
+                  <input
+                    placeholder=""
+                    id="p1"
+                    type="text"
+                    
+                    data-length="1"
+                    onkeyup="inputChange()"
+                  />
+                  <label for="p1">1</label>
+                </div>
+                <div class="col s2">
+                  <input
+                    placeholder=""
+                    id="p2"
+                    type="text"
+                    
+                    data-length="1"
+                    onkeyup="inputChange()"
+                  />
+                  <label for="p2">2</label>
+                </div>
+                <div class="col s2">
+                  <input
+                    placeholder=""
+                    id="p3"
+                    type="text"
+                    
+                    data-length="1"
+                    onkeyup="inputChange()"
+                  />
+                  <label for="p3">3</label>
+                </div>
+                <div class="col s2">
+                  <input
+                    placeholder=""
+                    id="p4"
+                    type="text"
+                    
+                    data-length="1"
+                    onkeyup="inputChange()"
+                  />
+                  <label for="p4">4</label>
+                </div>
+                <div class="col s2">
+                  <input
+                    placeholder=""
+                    id="p5"
+                    type="text"
+                    
+                    data-length="1"
+                    onkeyup="inputChange()"
+                  />
+                  <label for="p5">5</label>
+                </div>
+              </div>
+            </div>
+            <div class="col s3">
+              <h5>Included</h5>
+              <div class="col s12">
+                <input
+                  placeholder=""
+                  id="unknown_position"
+                  type="text"
+                  onkeyup="inputChange()"
+                  data-length="15"
+                />
+                <label for="unknown_position">Included Letters</label>
+              </div>
+            </div>
+            <div class="col s3">
+              <h5>Excluded</h5>
+              <div class="col s12">
+                <input
+                  placeholder=""
+                  id="excluded"
+                  type="text"
+                  onkeyup="inputChange()"
+                  data-length="15"
+                />
+                <label for="excluded">Exlcuded Letters</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+        <!--   Results Section   -->
+      </div>
+      <h5>Possible Matches</h5>
+      <p id="matches"></p>
+      <br><br>
+    </div>
+
+    <footer class="page-footer orange">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Made by Ben Morris</h5>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!--  Scripts-->
+    <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script> -->
+
+    <script src="js/wordler.js"></script>
+  </body>
+</html>
