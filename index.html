@@ -67,7 +67,7 @@
     <!-- Input Form -->
     <section class="container">
       <form action="#" data-form-type="other">
-        <fieldset class="form-grid">
+        <fieldset class="form-grid" style="max-width: 500px;">
           <legend>Known-Position Letters</legend>
           <div class="form-group">
             <label for="p1">1</label>
@@ -134,17 +134,18 @@
         <fieldset class="form-grid">
           <legend>Other Letters</legend>
           <div class="form-group">
-            <label for="unknown_position">Included Letters</label>
+            <label for="unknown_position">Include</label>
             <input
               placeholder=""
               id="unknown_position"
               type="text"
               onkeyup="inputChange()"
               data-length="15"
+              
             />
           </div>
           <div class="form-group">
-            <label for="excluded">Exlcuded Letters</label>
+            <label for="excluded">Exlcude</label>
             <input
               placeholder=""
               id="excluded"

@@ -4,11 +4,11 @@
   display: grid;
   grid-template-rows: auto;
   display: grid;
-  grid-gap: 1em;
+  grid-gap: 0.5em;
   grid-template-rows: auto;
   grid-template-columns: repeat(
     auto-fit,
-    minmax(calc(var(--page-width) / 12), 1fr)
+    minmax(calc(var(--page-width) / 20), 1fr)
   );
 }
 
@@ -18,8 +18,13 @@ input.col-field {
 
 input[type=text] {
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1em;
   text-align: center;
+}
+
+fieldset {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 .terminal-prompt::after {
