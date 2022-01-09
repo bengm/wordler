@@ -10,14 +10,8 @@
 
     <!-- CSS  -->
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
-    />
-    <link
-      href="css/materialize.css"
-      type="text/css"
-      rel="stylesheet"
-      media="screen,projection"
+      href="https://unpkg.com/terminal.css@0.7.2/dist/terminal.min.css"
     />
     <link
       href="css/style.css"
@@ -26,134 +20,159 @@
       media="screen,projection"
     />
   </head>
-  <body>
-    <nav class="grey darken-3" role="navigation">
-      <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo">Wordler</a>
-      </div>
-    </nav>
-    <div class="section no-pad-bot" id="index-banner">
-      <!-- Form Section -->
-      <div class="container">
-        <br /><br />
-
-        <form>
-          <div class="row">
-            <div class="col s5">
-              <h5>Known-Position Letters</h5>
-              <div class="row center">
-                <div class="col s2">
-                  <input
-                    placeholder=""
-                    id="p1"
-                    type="text"
-                    
-                    data-length="1"
-                    onkeyup="inputChange()"
-                  />
-                  <label for="p1">1</label>
-                </div>
-                <div class="col s2">
-                  <input
-                    placeholder=""
-                    id="p2"
-                    type="text"
-                    
-                    data-length="1"
-                    onkeyup="inputChange()"
-                  />
-                  <label for="p2">2</label>
-                </div>
-                <div class="col s2">
-                  <input
-                    placeholder=""
-                    id="p3"
-                    type="text"
-                    
-                    data-length="1"
-                    onkeyup="inputChange()"
-                  />
-                  <label for="p3">3</label>
-                </div>
-                <div class="col s2">
-                  <input
-                    placeholder=""
-                    id="p4"
-                    type="text"
-                    
-                    data-length="1"
-                    onkeyup="inputChange()"
-                  />
-                  <label for="p4">4</label>
-                </div>
-                <div class="col s2">
-                  <input
-                    placeholder=""
-                    id="p5"
-                    type="text"
-                    
-                    data-length="1"
-                    onkeyup="inputChange()"
-                  />
-                  <label for="p5">5</label>
-                </div>
-              </div>
-            </div>
-            <div class="col s3">
-              <h5>Included</h5>
-              <div class="col s12">
-                <input
-                  placeholder=""
-                  id="unknown_position"
-                  type="text"
-                  onkeyup="inputChange()"
-                  data-length="15"
-                />
-                <label for="unknown_position">Included Letters</label>
-              </div>
-            </div>
-            <div class="col s3">
-              <h5>Excluded</h5>
-              <div class="col s12">
-                <input
-                  placeholder=""
-                  id="excluded"
-                  type="text"
-                  onkeyup="inputChange()"
-                  data-length="15"
-                />
-                <label for="excluded">Exlcuded Letters</label>
-              </div>
-            </div>
+  <body class="terminal">
+    <!-- Top Title/Links -->
+    <div class="container">
+      <div class="terminal-nav">
+        <header class="terminal-logo">
+          <div class="logo terminal-prompt">
+            <a href="#" class="no-style">Wordler</a>
           </div>
-        </form>
+        </header>
+        <nav class="terminal-menu">
+          <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+            <li property="itemListElement" typeof="ListItem">
+              <a
+                href="https://github.com/bengm/wordler"
+                property="item"
+                typeof="WebPage"
+                class="menu-item active"
+                ><span property="name">Source Code</span></a
+              ><meta property="position" content="1" />
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+              <a
+                href="https://www.powerlanguage.co.uk/wordle/"
+                property="item"
+                typeof="WebPage"
+                class="menu-item"
+                ><span property="name">Wordle Game</span></a
+              ><meta property="position" content="2" />
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
 
-    <div class="container">
+    <!-- Intro Text -->
+    <section class="container">
+      <p>
+        A helper companion to the
+        <a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a> puzzle
+        game.
+      </p>
+    </section>
+    <hr />
+
+    <!-- Input Form -->
+    <section class="container">
+      <form action="#" data-form-type="other">
+        <fieldset class="form-grid">
+          <legend>Known-Position Letters</legend>
+          <div class="form-group">
+            <label for="p1">1</label>
+            <input
+              placeholder=""
+              id="p1"
+              type="text"
+              data-length="1"
+              maxlength="1"
+              onkeyup="inputChange()"
+              class="col-field"
+            />
+          </div>
+          <div class="form-group">
+            <label for="p2">2</label>
+            <input
+              placeholder=""
+              id="p2"
+              type="text"
+              data-length="1"
+              maxlength="1"
+              onkeyup="inputChange()"
+              class="col-field"
+            />
+          </div>
+          <div class="form-group">
+            <label for="p3">3</label>
+            <input
+              placeholder=""
+              id="p3"
+              type="text"
+              data-length="1"
+              maxlength="1"
+              onkeyup="inputChange()"
+              class="col-field"
+            />
+          </div>
+          <div class="form-group">
+            <label for="p4">4</label>
+            <input
+              placeholder=""
+              id="p4"
+              type="text"
+              data-length="1"
+              maxlength="1"
+              onkeyup="inputChange()"
+              class="col-field"
+            />
+          </div>
+          <div class="form-group">
+            <label for="p5">5</label>
+            <input
+              placeholder=""
+              id="p5"
+              type="text"
+              data-length="1"
+              maxlength="1"
+              onkeyup="inputChange()"
+              class="col-field"
+            />
+          </div>
+        </fieldset>
+        <br />
+        <fieldset class="form-grid">
+          <legend>Other Letters</legend>
+          <div class="form-group">
+            <label for="unknown_position">Included Letters</label>
+            <input
+              placeholder=""
+              id="unknown_position"
+              type="text"
+              onkeyup="inputChange()"
+              data-length="15"
+            />
+          </div>
+          <div class="form-group">
+            <label for="excluded">Exlcuded Letters</label>
+            <input
+              placeholder=""
+              id="excluded"
+              type="text"
+              onkeyup="inputChange()"
+              data-length="15"
+            />
+          </div>
+        </fieldset>
+      </form>
+    </section>
+    <hr />
+    <section class="container">
       <div class="section">
         <!--   Results Section   -->
       </div>
-      <h5>Possible Matches</h5>
+      <h2>Possible Matches</h2>
       <p id="matches"></p>
-      <br><br>
-    </div>
+      <br /><br />
+    </section>
 
-    <footer class="page-footer orange">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Made by Ben Morris</h5>
-          </div>
-        </div>
-      </div>
+    <!-- Footer -->
+    <hr />
+    <footer class="container">
+      <p>Made by Ben Morris</p>
     </footer>
 
-    <!--  Scripts-->
-    <!-- <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/init.js"></script> -->
-
+    <!-- Load Script -->
     <script src="js/wordler.js"></script>
   </body>
 </html>

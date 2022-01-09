@@ -13,3 +13,4 @@ while IFS= read -r line; do
      echo "$line" >> 5_letter_words.txt
   fi
 done < all_words.txt
+
