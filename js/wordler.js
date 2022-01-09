@@ -1,17 +1,11 @@
-// Set up base word list
-// const allWords = ['first', 'lasts', 'blast', 'great', 'bleat'];
+// Set up base word lists
 document.allWords = [];
 document.matchWords = [];
 
-writeResults = () => {
-  const resultsEl = document.getElementById('matches');
-  let formattedResults = document.matchWords.join(", ");
-  resultsEl.innerHTML = formattedResults;
-}
-
+// function to get the entire word list to start things off
 getAllWords = () => {
   var wordFile = new XMLHttpRequest();
-    wordFile.open("GET","5_letter_words.txt",true);
+    wordFile.open("GET","words/5_letter_words.txt",true);
     wordFile.send();
     wordFile.onreadystatechange = function() {
         if (wordFile.readyState== 4 && wordFile.status == 200) {
@@ -20,6 +14,7 @@ getAllWords = () => {
      }
 }
 
+// handle form changes and filter the list accordingly
 inputChange = () => {
   let words = document.allWords;
   
@@ -72,6 +67,14 @@ filterByExcludedLetters = (wordlist, letters) => {
   return wordlist;
 }
 
+// write the results to the doc
+writeResults = () => {
+  const resultsEl = document.getElementById('matches');
+  let formattedResults = document.matchWords.join(", ");
+  resultsEl.innerHTML = formattedResults;
+}
+
+// start us off by building up the whole word list
 getAllWords();
 
 
