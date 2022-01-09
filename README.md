@@ -2,6 +2,12 @@
 
 ## Word Lists
 
+### Current Method
+
+I grabbed the 5 letter scrabble words from [Jordan's repo](https://github.com/jakerella/guessle/blob/main/lists/scrabble_5.json) (slightly massaged to plain text).
+
+### Old Method
+
 I grabbed the overall word list from the system, then filtered that down to a list of 5-letter words. See `generate_5_letter_words.sh` for the details.
 
 ## HTML/CSS Framework

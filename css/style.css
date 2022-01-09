@@ -12,6 +12,11 @@
   );
 }
 
+.result-list span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 input.col-field {
   width: 3em;
 }
