@@ -20,5 +20,6 @@ None! I wanted to try it using plain old JS. So far, so good.
 
 ## Feature Roadmap
 
-* Word Scoring - score all possible match words as to how similar they are to other remaining match words.
+* Capture 'include' as aligned to the 5 slots vs. as a general bucket.
+* Word Scoring - score all possible match words as to how similar they are to other remaining match words. This is done somewhat, but maybe could use more sophistication.
 * Play as Bot - actually play the game driven from the app.

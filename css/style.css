@@ -17,8 +17,14 @@
   white-space: nowrap;
 }
 
-input.col-field {
-  width: 3em;
+fieldset {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.form-group label {
+  text-align: center;
+  color: #999;
 }
 
 input[type=text] {
@@ -27,9 +33,13 @@ input[type=text] {
   text-align: center;
 }
 
-fieldset {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+input[type=text].green-field {
+  background-color: #ddffdd;
+}
+input[type=text].yellow-field {
+  background-color: #ffd}
+input[type=text].gray-field {
+  background-color: #eee;
 }
 
 .terminal-prompt::after {

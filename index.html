@@ -68,86 +68,116 @@
     <section class="container">
       <form action="#" data-form-type="other" id="wordForm" >
         <fieldset class="form-grid" style="max-width: 500px">
-          <legend>Known-Position Letters</legend>
+          <legend>"Green" Known-Position Letters</legend>
           <div class="form-group">
-            <label for="p1">1</label>
+            <label for="g1">1</label>
             <input
-              placeholder=""
-              id="p1"
+              id="g1"
+              class="green-field"
               type="text"
-              data-length="1"
               maxlength="1"
-              class="col-field"
             />
           </div>
           <div class="form-group">
-            <label for="p2">2</label>
+            <label for="g2">2</label>
             <input
-              placeholder=""
-              id="p2"
+              id="g2"
+              class="green-field"
               type="text"
-              data-length="1"
               maxlength="1"
-              class="col-field"
             />
           </div>
           <div class="form-group">
-            <label for="p3">3</label>
+            <label for="g3">3</label>
             <input
-              placeholder=""
-              id="p3"
+              id="g3"
+              class="green-field"
               type="text"
-              data-length="1"
               maxlength="1"
-              class="col-field"
             />
           </div>
           <div class="form-group">
-            <label for="p4">4</label>
+            <label for="g4">4</label>
             <input
-              placeholder=""
-              id="p4"
+              id="g4"
+              class="green-field"
               type="text"
-              data-length="1"
               maxlength="1"
-              class="col-field"
             />
           </div>
           <div class="form-group">
-            <label for="p5">5</label>
+            <label for="g5">5</label>
             <input
-              placeholder=""
-              id="p5"
+              id="g5"
+              class="green-field"
               type="text"
-              data-length="1"
               maxlength="1"
-              class="col-field"
             />
           </div>
         </fieldset>
         <br />
-        <fieldset class="form-grid">
-          <legend>Other Letters</legend>
+        <fieldset class="form-grid" style="max-width: 500px">
+          <legend>"Yellow" Incorrect-Position Letters</legend>
           <div class="form-group">
-            <label for="unknown_position">Include</label>
+            <label for="y1">1</label>
             <input
-              placeholder=""
-              id="unknown_position"
+              id="y1"
+              class="yellow-field"
               type="text"
-              data-length="15"
+              maxlength="4"
             />
           </div>
           <div class="form-group">
-            <label for="excluded">Exlcude</label>
+            <label for="y2">2</label>
             <input
-              placeholder=""
-              id="excluded"
+              id="y2"
+              class="yellow-field"
               type="text"
-              onkeyup=""
-              data-length="15"
+              maxlength="4"
+            />
+          </div>
+          <div class="form-group">
+            <label for="y3">3</label>
+            <input
+              id="y3"
+              class="yellow-field"
+              type="text"
+              maxlength="4"
+            />
+          </div>
+          <div class="form-group">
+            <label for="y4">4</label>
+            <input
+              id="y4"
+              class="yellow-field"
+              type="text"
+              maxlength="4"
+            />
+          </div>
+          <div class="form-group">
+            <label for="y5">5</label>
+            <input
+              id="y5"
+              class="yellow-field"
+              type="text"
+              maxlength="4"
             />
           </div>
         </fieldset>
+
+        <br />
+        <fieldset style="max-width: 500px">
+          <legend>"Gray" Excluded Letters</legend>
+          <div class="form-group">
+            <label for="excluded" style="visibility: hidden;">"Gray" Excluded Letters</label>
+            <input
+              id="excluded"
+              class="gray-field"
+              type="text"
+            />
+          </div>
+        </fieldset>
+
         <div class="form-group">
           <br>
         <button class="btn btn-default" type="submit" role="button" name="submit" id="submit" data-form-type="action">Find Matches</button>

@@ -27,30 +27,34 @@ submitForm = (event) => {
 
 inputChange = () => {
   let words = document.allWords;
-  
-  let p1 = massageInputText(document.getElementById('p1').value);
-  let p2 = massageInputText(document.getElementById('p2').value);
-  let p3 = massageInputText(document.getElementById('p3').value);
-  let p4 = massageInputText(document.getElementById('p4').value);
-  let p5 = massageInputText(document.getElementById('p5').value);
-  let unknown_position = massageInputText(document.getElementById('unknown_position').value);
-  let excluded = massageInputText(document.getElementById('excluded').value);
+  let green = [];
+  let yellow = [];
 
-  words = filterByPosition(words, 1, p1);
-  words = filterByPosition(words, 2, p2);
-  words = filterByPosition(words, 3, p3);
-  words = filterByPosition(words, 4, p4);
-  words = filterByPosition(words, 5, p5);
-  words = filterByIncludedLetters(words, unknown_position);
-  words = filterByExcludedLetters(words, excluded);
+  // Grab the values for the 5 green & yellow inputs, then the gray
+  for (let i = 0; i < 5; i++) {
+    // translate 0-index to 1-index used form field numbering
+    let fieldNum = i+1;
+    green[i]  = massageInputText(document.getElementById('g' + fieldNum).value);
+    yellow[i] = massageInputText(document.getElementById('y' + fieldNum).value);
+  }
+  let gray = massageInputText(document.getElementById('excluded').value);
 
+  // Apply the filters
+  for (let i = 0; i < 5; i++) {
+    words = filterGreen(words, i, green[i]);
+    words = filterYellow(words, i, yellow[i]);
+  }
+  words = filterGray(words, gray);
   document.matchWords = words;
 
   // only score if filtered TODO currently hacked at 1000 for dev/testing
+  // filtering all at ~10k words takes about 1 minute
   console.log(document.matchWords.length);
   if (document.matchWords.length < 1000) {
     document.matchWordsData = scoreAllWords(words);
   }
+
+  // update the UI
   writeResults();
   
 }
@@ -62,22 +66,23 @@ massageInputText = (t) => {
 
 // Functions to filter to matching words
 
-filterByPosition = (wordlist, position, letter) => {
+filterGreen = (wordlist, position, letter) => {
   if (position && letter) {
-    wordlist = wordlist.filter(word => word[position-1] == letter );
+    wordlist = wordlist.filter(word => word[position] == letter );
   }
   return wordlist;
 }
 
-filterByIncludedLetters = (wordlist, letters) => {
+filterYellow = (wordlist, position, letters) => {
   var letters = letters.split("");
   letters.forEach(letter => {
-    wordlist = wordlist.filter(word => word.includes(letter));
+    // word both has the letter somewhere, but does NOT have the letter in the 'yellow' position
+    wordlist = wordlist.filter(word => word.includes(letter) && word[position] !== letter);   
   });
   return wordlist;
 }
 
-filterByExcludedLetters = (wordlist, letters) => {
+filterGray = (wordlist, letters) => {
   var letters = letters.split("");
   letters.forEach(letter => {
     wordlist = wordlist.filter(word => !word.includes(letter));
