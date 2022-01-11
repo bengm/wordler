@@ -6,6 +6,10 @@
 
 I grabbed the 5 letter scrabble words from [Jordan's repo](https://github.com/jakerella/guessle/blob/main/lists/scrabble_5.json) (slightly massaged to plain text).
 
+### Other Sources
+
+Popular words are here: https://github.com/dolph/dictionary and saved in this repo as `popular.txt`. This repo has other helpful jumping off points to word frequency count from different sources.
+
 ### Old Method
 
 I grabbed the overall word list from the system, then filtered that down to a list of 5-letter words. See `generate_5_letter_words.sh` for the details.
@@ -25,4 +29,4 @@ None! I wanted to try it using plain old JS. So far, so good.
 * Advanced word scoring, including scoring words that are *not* similar in order to cover more 'new' letters and learn to more quickly narrow the universe. 
 * Play as Bot - actually play the game driven from the app.
 * Strip out non-letter characters from form inputs.
-
+* Better keyboard navigation - auto advance across greens, allow arrow key nav

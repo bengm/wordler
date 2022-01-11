@@ -1,13 +1,14 @@
 // Set up base word lists
 document.allWords = [];
 document.allScoredWords = [];
+document.popularWords = [];
 document.matchWords = [];
 document.matchWordsData = [];
 document.altWordsData = [];
 
 // function to get the entire word list to start things off
 // core word list
-getAllWords = () => {
+startup = () => {
   var wordFile = new XMLHttpRequest();
   wordFile.open("GET", "words/scrabble5.txt", true);
   wordFile.send();
@@ -15,6 +16,18 @@ getAllWords = () => {
     if (wordFile.readyState == 4 && wordFile.status == 200) {
       // split results by newline; convert to lower case
       document.allWords = wordFile.responseText
+        .split("\n")
+        .map((w) => w.toLowerCase());
+      // trigger the input change to refresh ui
+    }
+  };
+  var popWordFile = new XMLHttpRequest();
+  popWordFile.open("GET", "words/popular5.txt", true);
+  popWordFile.send();
+  popWordFile.onreadystatechange = function () {
+    if (popWordFile.readyState == 4 && popWordFile.status == 200) {
+      // split results by newline; convert to lower case
+      document.popularWords = popWordFile.responseText
         .split("\n")
         .map((w) => w.toLowerCase());
       // trigger the input change to refresh ui
@@ -42,8 +55,7 @@ submitForm = (event) => {
 };
 
 inputChange = () => {
-  let words = document.allWords;
-  let altWords = document.allWords;
+  let words = document.popularWords;
   let green = [];
   let yellow = [];
 
@@ -66,11 +78,10 @@ inputChange = () => {
 
   // only score if filtered TODO currently hacked at 1000 for dev/testing
   // filtering all at ~10k words takes about 1 minute
-  console.log(document.matchWords.length);
-  if (document.matchWords.length < 1000) {
+  if (document.matchWords.length < 100000) {
     document.matchWordsData = scoreAllWords(words);
     document.altWordsData = scoreAlternateWords(words, green, yellow, gray);
-    letterFrequency(words);
+    document.letterFrequency = letterFrequency(words);
   }
 
   // update the UI
@@ -85,7 +96,7 @@ massageInputText = (t) => {
 // Functions to filter to matching words
 
 filterGreen = (wordlist, position, letter) => {
-  if (position && letter) {
+  if (letter) {
     wordlist = wordlist.filter((word) => word[position] == letter);
   }
   return wordlist;
@@ -207,6 +218,7 @@ writeResults = () => {
   const numResultsEl = document.getElementById("numMatches");
   const altResultsEl = document.getElementById("altMatches");
   const altNumResultsEl = document.getElementById("numAltMatches");
+  const letterFrequencyEl = document.getElementById("letterFrequency");
   let formattedResults = document.matchWordsData
     .map((wd) => `<span>${wd.word} | ${wd.distance}</span>`)
     .join("<br>");
@@ -215,14 +227,17 @@ writeResults = () => {
       (wd) => `<span>${wd.word} | ${wd.distance} | ${wd.letterFreqScore} | ${wd.knownLetterCount}</span>`
     )
     .join("<br>");
+  const lfKeys = Object.keys(document.letterFrequency);
+  let formattedLF = lfKeys.map(k => k + ":" + document.letterFrequency[k] + "<br>").join(" ");
   numResultsEl.innerHTML = "(" + document.matchWords.length + ")";
   altNumResultsEl.innerHTML = "(" + document.altWordsData.length + ")";
   resultsEl.innerHTML = formattedResults;
   altResultsEl.innerHTML = formattedAlt;
+  letterFrequencyEl.innerHTML = formattedLF;
 };
 
 // start us off by listening for for submit,then building up the whole word list
 document
   .getElementById("wordForm")
   .addEventListener("submit", submitForm, false);
-getAllWords();
+startup();
