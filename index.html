@@ -67,7 +67,7 @@
     <!-- Input Form -->
     <section class="container">
       <form action="#" data-form-type="other" id="wordForm" >
-        <fieldset class="form-grid" style="max-width: 500px">
+        <fieldset class="tight-grid" style="max-width: 500px">
           <legend>"Green" Known-Position Letters</legend>
           <div class="form-group">
             <label for="g1">1</label>
@@ -116,7 +116,7 @@
           </div>
         </fieldset>
         <br />
-        <fieldset class="form-grid" style="max-width: 500px">
+        <fieldset class="tight-grid" style="max-width: 500px">
           <legend>"Yellow" Incorrect-Position Letters</legend>
           <div class="form-group">
             <label for="y1">1</label>
@@ -187,18 +187,26 @@
     <hr />
 
     <!--   Results Section   -->
-    <section class="container">
-      <div class="section"></div>
-      <h2>Possible Matches <span id="num_matches"></span></h2>
-      <p><em>Words are sorted by score for "best" next word to guess.</em></p>
-      <div id="matches" class="result-list"></div>
-      <br /><br />
+    <section class="container section grid">
+      <div>
+        <h2>Possible Matches <span id="numMatches"></span></h2>
+        <p><em>Words are sorted by score for "best" next word to guess.</em></p>
+        <div id="matches" class="result-list"></div>
+        <br /><br />
+      </div>
+      <div>
+        <h2>Alternative Letter Words <span id="numAltMatches"></span></h2>
+        <p><em>Words with none of the identified letters above.</em></p>
+        <div id="altMatches" class="result-list"></div>
+        <br /><br />
+      </div>
     </section>
 
     <!-- Footer -->
     <hr />
     <footer class="container">
       <p>Made by Ben Morris</p>
+      <p>Note: if you'd like to try a Wordle clone that lets you play many games in a row, try Jordan's <a href="https://guessle.herokuapp.com/">Guessle</a> app.</p>
     </footer>
 
     <!-- Load Script -->

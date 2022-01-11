@@ -1,6 +1,6 @@
 /* Custom Stylesheet */
 
-.form-grid {
+.tight-grid, .grid {
   display: grid;
   grid-template-rows: auto;
   display: grid;
@@ -10,6 +10,10 @@
     auto-fit,
     minmax(calc(var(--page-width) / 20), 1fr)
   );
+}
+
+.grid {
+  grid-gap: 2em;
 }
 
 .result-list span {
