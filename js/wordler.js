@@ -78,10 +78,12 @@ inputChange = () => {
 
   // only score if filtered TODO currently hacked at 1000 for dev/testing
   // filtering all at ~10k words takes about 1 minute
-  if (document.matchWords.length < 100000) {
+  document.letterFrequency = letterFrequency(words);
+  if (document.matchWords.length < 2000) {
     document.matchWordsData = scoreAllWords(words);
     document.altWordsData = scoreAlternateWords(words, green, yellow, gray);
-    document.letterFrequency = letterFrequency(words);
+  } else {
+    document.matchWordsData = document.allScoredWords;
   }
 
   // update the UI
@@ -223,12 +225,16 @@ writeResults = () => {
     .map((wd) => `<span>${wd.word} | ${wd.distance}</span>`)
     .join("<br>");
   let formattedAlt = document.altWordsData
+    .slice(0, 100)
     .map(
-      (wd) => `<span>${wd.word} | ${wd.distance} | ${wd.letterFreqScore} | ${wd.knownLetterCount}</span>`
+      (wd) =>
+        `<span>${wd.word} | ${wd.distance} | ${wd.letterFreqScore} | ${wd.knownLetterCount}</span>`
     )
     .join("<br>");
-  const lfKeys = Object.keys(document.letterFrequency);
-  let formattedLF = lfKeys.map(k => k + ":" + document.letterFrequency[k] + "<br>").join(" ");
+  let lfKeys = Object.keys(document.letterFrequency);
+  let formattedLF = lfKeys
+    .map((k) => k + ":" + document.letterFrequency[k] + "<br>")
+    .join(" ");
   numResultsEl.innerHTML = "(" + document.matchWords.length + ")";
   altNumResultsEl.innerHTML = "(" + document.altWordsData.length + ")";
   resultsEl.innerHTML = formattedResults;
