@@ -76,6 +76,7 @@
               class="green-field"
               type="text"
               maxlength="1"
+              value="c"
             />
           </div>
           <div class="form-group">
@@ -85,6 +86,7 @@
               class="green-field"
               type="text"
               maxlength="1"
+              value="a"
             />
           </div>
           <div class="form-group">
@@ -187,6 +189,12 @@
     <hr />
 
     <!--   Results Section   -->
+
+    <section class="container section">
+      <div class="progress-bar progress-bar-show-percent">
+        <div id="progressBar" class="progress-bar-filled" style="width: 0%" data-filled="Calculating 0%"></div>
+      </div>
+    </section>
     <section class="container section grid">
       <div>
         <h2>Possible Matches <span id="numMatches"></span></h2>
@@ -201,9 +209,9 @@
         <br /><br />
       </div>
       <div>
-        <h2>Alternative Words <span id="numAltMatches"></span></h2>
-        <p><em>None of the identified letters.</em></p>
-        <div id="altMatches" class="result-list"></div>
+        <h2>Guess Suggestions</h2>
+        <p><em>Narrow down possible matches.</em></p>
+        <div id="guesses" class="result-list"></div>
         <br /><br />
       </div>
     </section>
