@@ -125,7 +125,7 @@ const Filter = {
 const Score = {
   byFilterPotential: (matchedWords, allWords) => {
     let scoredSet = [];
-    UI.updateProgress(0);
+    UI.writeProgress(0);
     console.log("... starting filter ...", matchedWords.length,allWords.length);
     // For each possible target/guess word combo, how many possible matches would remain?
     // A resulting low matchCount means that it would narrow the list down to few words
@@ -133,7 +133,7 @@ const Score = {
       // update UI progress along the way
       if (g % 100 == 0) {
         console.log(g);
-        UI.updateProgress(Math.round((100 * g) / allWords.length));
+        UI.writeProgress(Math.round((100 * g) / allWords.length));
       }
       let matchCount = 0;
       matchedWords.forEach((targetWord) => {
@@ -319,7 +319,7 @@ const UI = {
       .join("<br>");
     guessResultsEl.innerHTML = formattedGuesses;
   },
-  updateProgress: (pct) => {
+  writeProgress: (pct) => {
     const progEl = document.getElementById("progressBar");
     progEl.setAttribute("style", `width: ${pct}%`);
     progEl.setAttribute("data-filled", `Calculating ${pct}%`);
