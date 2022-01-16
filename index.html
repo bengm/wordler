@@ -66,55 +66,28 @@
 
     <!-- Input Form -->
     <section class="container">
-      <form action="#" data-form-type="other" id="wordForm" >
+      <form action="#" data-form-type="other" id="wordForm">
         <fieldset class="tight-grid" style="max-width: 500px">
           <legend>"Green" Known-Position Letters</legend>
           <div class="form-group">
             <label for="g1">1</label>
-            <input
-              id="g1"
-              class="green-field"
-              type="text"
-              maxlength="1"
-              value="c"
-            />
+            <input id="g1" class="green-field" type="text" maxlength="1" />
           </div>
           <div class="form-group">
             <label for="g2">2</label>
-            <input
-              id="g2"
-              class="green-field"
-              type="text"
-              maxlength="1"
-              value="a"
-            />
+            <input id="g2" class="green-field" type="text" maxlength="1" />
           </div>
           <div class="form-group">
             <label for="g3">3</label>
-            <input
-              id="g3"
-              class="green-field"
-              type="text"
-              maxlength="1"
-            />
+            <input id="g3" class="green-field" type="text" maxlength="1" />
           </div>
           <div class="form-group">
             <label for="g4">4</label>
-            <input
-              id="g4"
-              class="green-field"
-              type="text"
-              maxlength="1"
-            />
+            <input id="g4" class="green-field" type="text" maxlength="1" />
           </div>
           <div class="form-group">
             <label for="g5">5</label>
-            <input
-              id="g5"
-              class="green-field"
-              type="text"
-              maxlength="1"
-            />
+            <input id="g5" class="green-field" type="text" maxlength="1" />
           </div>
         </fieldset>
         <br />
@@ -122,48 +95,23 @@
           <legend>"Yellow" Incorrect-Position Letters</legend>
           <div class="form-group">
             <label for="y1">1</label>
-            <input
-              id="y1"
-              class="yellow-field"
-              type="text"
-              maxlength="4"
-            />
+            <input id="y1" class="yellow-field" type="text" maxlength="4" />
           </div>
           <div class="form-group">
             <label for="y2">2</label>
-            <input
-              id="y2"
-              class="yellow-field"
-              type="text"
-              maxlength="4"
-            />
+            <input id="y2" class="yellow-field" type="text" maxlength="4" />
           </div>
           <div class="form-group">
             <label for="y3">3</label>
-            <input
-              id="y3"
-              class="yellow-field"
-              type="text"
-              maxlength="4"
-            />
+            <input id="y3" class="yellow-field" type="text" maxlength="4" />
           </div>
           <div class="form-group">
             <label for="y4">4</label>
-            <input
-              id="y4"
-              class="yellow-field"
-              type="text"
-              maxlength="4"
-            />
+            <input id="y4" class="yellow-field" type="text" maxlength="4" />
           </div>
           <div class="form-group">
             <label for="y5">5</label>
-            <input
-              id="y5"
-              class="yellow-field"
-              type="text"
-              maxlength="4"
-            />
+            <input id="y5" class="yellow-field" type="text" maxlength="4" />
           </div>
         </fieldset>
 
@@ -171,18 +119,25 @@
         <fieldset style="max-width: 500px">
           <legend>"Gray" Excluded Letters</legend>
           <div class="form-group">
-            <label for="excluded" style="visibility: hidden;">"Gray" Excluded Letters</label>
-            <input
-              id="excluded"
-              class="gray-field"
-              type="text"
-            />
+            <label for="excluded" style="visibility: hidden"
+              >"Gray" Excluded Letters</label
+            >
+            <input id="excluded" class="gray-field" type="text" />
           </div>
         </fieldset>
 
         <div class="form-group">
-          <br>
-        <button class="btn btn-default" type="submit" role="button" name="submit" id="submit" data-form-type="action">Find Matches</button>
+          <br />
+          <button
+            class="btn btn-default"
+            type="submit"
+            role="button"
+            name="submit"
+            id="submit"
+            data-form-type="action"
+          >
+            Find Matches
+          </button>
         </div>
       </form>
     </section>
@@ -192,7 +147,12 @@
 
     <section class="container section">
       <div class="progress-bar progress-bar-show-percent">
-        <div id="progressBar" class="progress-bar-filled" style="width: 0%" data-filled="Calculating 0%"></div>
+        <div
+          id="progressBar"
+          class="progress-bar-filled"
+          style="width: 0%"
+          data-filled="Calculating 0%"
+        ></div>
       </div>
     </section>
     <section class="container section grid">
@@ -203,15 +163,28 @@
         <br /><br />
       </div>
       <div>
-        <h2>Letter Frequency</h2>
-        <p><em>In remaining possible matches</em></p>
-        <div id="letterFrequency" class="result-list"></div>
-        <br /><br />
-      </div>
-      <div>
         <h2>Guess Suggestions</h2>
         <p><em>Narrow down possible matches.</em></p>
         <div id="guesses" class="result-list"></div>
+        <br /><br />
+      </div>
+      <div>
+        <h2>Letter Frequency</h2>
+        <p><em>In remaining possible matches (as percent of word count)</em></p>
+        <table class="lfData">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Any</th>
+              <th>p1</th>
+              <th>p2</th>
+              <th>p3</th>
+              <th>p4</th>
+              <th>p5</th>
+            </tr>
+          </thead>
+          <tbody id="letterFrequency"></tbody>
+        </table>
         <br /><br />
       </div>
     </section>
@@ -220,7 +193,11 @@
     <hr />
     <footer class="container">
       <p>Made by Ben Morris</p>
-      <p>Note: if you'd like to try a Wordle clone that lets you play many games in a row, try Jordan's <a href="https://guessle.herokuapp.com/">Guessle</a> app.</p>
+      <p>
+        Note: if you'd like to try a Wordle clone that lets you play many games
+        in a row, try Jordan's
+        <a href="https://guessle.herokuapp.com/">Guessle</a> app.
+      </p>
     </footer>
 
     <!-- Load Script -->

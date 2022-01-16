@@ -28,7 +28,7 @@ None! I wanted to try it using plain old JS. So far, so good.
 * ~~Basic Word Scoring - score all possible match words as to how similar they are to other remaining match words.~~
 * ~~Advanced word scoring, including scoring words that are *not* similar in order to cover more 'new' letters and learn to more quickly narrow the universe.~~
 * Switch processing to async/promises
-* Update letter frequency to also count general frequency plus specific position frequencies.
+* ~~Update letter frequency to also count general frequency plus specific position frequencies.~~
 * Improve recommendations to bump/highlight guess words that are also possible matches
 * Play as Bot - actually play the game driven from the app.
 * Strip out non-letter characters from form inputs.

@@ -1,6 +1,7 @@
 /* Custom Stylesheet */
 
-.tight-grid, .grid {
+.tight-grid,
+.grid {
   display: grid;
   grid-template-rows: auto;
   display: grid;
@@ -31,21 +32,31 @@ fieldset {
   color: #999;
 }
 
-input[type=text] {
+input[type="text"] {
   font-weight: bold;
   font-size: 1em;
   text-align: center;
 }
 
-input[type=text].green-field {
+input[type="text"].green-field {
   background-color: #ddffdd;
 }
-input[type=text].yellow-field {
-  background-color: #ffd}
-input[type=text].gray-field {
+input[type="text"].yellow-field {
+  background-color: #ffd;
+}
+input[type="text"].gray-field {
   background-color: #eee;
 }
 
 .terminal-prompt::after {
   animation-iteration-count: 10;
+}
+
+table.lfData tbody td {
+  text-align: right;
+}
+table.lfData,
+table.lfData th,
+table.lfData td {
+  border-color: lightgray;
 }
