@@ -1,5 +1,6 @@
 const Data = {
   allWords: [],
+  allWordsData: [],
   popularWords: [],
   matchWords: [],
   matchWordsData: [],
@@ -37,12 +38,15 @@ const Data = {
     scoreFile.onreadystatechange = function () {
       if (scoreFile.readyState == 4 && scoreFile.status == 200) {
         // split results by newline; convert to lower case
-        Data.allScoredWords = JSON.parse(scoreFile.responseText);
+        Data.allWordsData = JSON.parse(scoreFile.responseText);
         // trigger the input change to refresh ui
         inputChange();
       }
     };
   },
+  clone: (original) => {
+    return JSON.parse(JSON.stringify(original));
+  }
 };
 
 // Update the analysis & guess stats
@@ -55,21 +59,21 @@ inputChange = () => {
     formData.yellow,
     formData.gray
   );
-  
   // Do Analysis
   let t0 = performance.now();
   Data.letterFrequency = Score.letterFrequency(Data.matchWords);
   UI.writeLF(Data.letterFrequency);
-  Data.guessWordsData = Score.byLetterFrequency(
+  Score.byLetterFrequency(
     Data.matchWords,
-    Data.allWords,
+    Data.allWordsData,
     formData.green,
     formData.yellow,
     formData.gray
   );
-  UI.writeGuesses(Data.guessWordsData);
-  Data.matchWordsData = Data.guessWordsData.filter((w) => w.possibleMatch);
+  Data.matchWordsData = Data.clone(Data.allWordsData.filter((w) => w.possibleMatch));
   UI.writeMatches(Data.matchWordsData);
+  Score.byFilterPotential(Data.matchWords, Data.allWordsData);
+  UI.writeGuesses(Data.allWordsData);
   console.log("Exec Time: ", performance.now() - t0);
 };
 
@@ -111,42 +115,38 @@ const Filter = {
 // Logic for scoring potential matches and other analysis
 const Score = {
   byFilterPotential: (matchedWords, allWords) => {
-    let scoredSet = [];
-    UI.writeProgress(0);
-    console.log(
-      "... starting byfilter ...",
-      matchedWords.length,
-      allWords.length
-    );
     // For each possible target/guess word combo, how many possible matches would remain?
     // A resulting low matchCount means that it would narrow the list down to few words
-    allWords.forEach((guessWord, g) => {
+    // Currently limiting it to top 15k comparisons
+    // 3000 -> 10 = 15000
+    // 15000 / 3000 = 5
+    // 15000 / 200 = 
+    let iterations = Math.min(13000 / matchedWords.length, allWords.length)
+    console.log(iterations)
+    for (let g=0; g < iterations; g+= 1) {
       // update UI progress along the way
       if (g % 100 == 0) {
-        console.log(g);
         UI.writeProgress(Math.round((100 * g) / allWords.length));
       }
+      // score this possible guess/target combo, normalized as portion of matched words
+      let guessWord = allWords[g].word;
       let matchCount = 0;
-      matchedWords.forEach((targetWord) => {
+      for (let m=0; m < matchedWords.length; m++) {
+        let targetWord = matchedWords[m];
         matchCount += Score.countRemainingMatches(
           guessWord,
           targetWord,
           matchedWords
         );
-      });
-      // score this possible guess/target combo
-      scoredSet.push({
-        word: guessWord,
-        remainingMatchCount: matchCount,
-      });
-      console.log(guessWord, matchCount);
-    });
-    return scoredSet.sort(
-      (a, b) => a.remainingMatchCount - b.remainingMatchCount
+      }
+      allWords[g].filterPowerScore = matchCount / matchedWords.length;
+    }
+    allWords.sort(
+      (a, b) => a.filterPowerScore - b.filterPowerScore
     );
   },
   countRemainingMatches: (guessWord, targetWord, possibleMatches) => {
-    let matches = possibleMatches;
+    let matches = Data.clone(possibleMatches);
     Game.scoreGuess(guessWord, targetWord).forEach((scoredLetter) => {
       switch (scoredLetter.status) {
         case "green":
@@ -170,15 +170,13 @@ const Score = {
     return matches.length;
   },
   byLetterFrequency: (matchedWords, allWords, green, yellow, gray) => {
-    wordsData = [];
     let knownLetters = [green.join(""), yellow.join(""), gray]
       .join("")
       .split("");
     let lf = Score.letterFrequency(matchedWords);
-    allWords.forEach((word) => {
-      let w = { word };
-      w.possibleMatch = matchedWords.includes(word);
-      w.letters = word.split("").map( (l,i) => {
+    allWords.forEach((w) => {
+      w.possibleMatch = matchedWords.includes(w.word);
+      w.letters = w.word.split("").map( (l,i) => {
         return {letter: l, freqInPos: lf[l][i], freqAtAny: lf[l].atAny} ;
       });
       // Match Score
@@ -205,9 +203,8 @@ const Score = {
       if (w.possibleMatch) {
         w.lfGuessScore = w.lfGuessScore * 1.1;
       }
-      wordsData.push(w);
     });
-    return wordsData;
+    allWords.sort((a,b) => b.lfGuessScore - a.lfGuessScore);
   },
   letterFrequency: (words) => {
     lf = {};
@@ -310,13 +307,16 @@ const UI = {
     let gray = document.getElementById("excluded").value.toLowerCase();
     return { green, yellow, gray };
   },
+  writeNum: (number) => {
+    return (isNaN(number)) ? "" : Math.round(number);
+  },
   writeMatches: (matchWordsData) => {
     const matchesEl = document.getElementById("matches");
     const numResultsEl = document.getElementById("numMatches");
     let formatted = matchWordsData
       .sort((a, b) => b.lfMatchScore - a.lfMatchScore)
       .slice(0, 100)
-      .map((wd) => `<span>${wd.word}</span> | ${Math.round(wd.lfMatchScore)}`)
+      .map((wd) => `<span>${wd.word}</span> | ${UI.writeNum(wd.lfMatchScore)}`)
       .join("<br>");
     numResultsEl.innerHTML = "(" + matchWordsData.length + ")";
     matchesEl.innerHTML = formatted;
@@ -329,12 +329,12 @@ const UI = {
         (k) => `
         <tr>
           <th>${k}</th>
-          <td><strong>${Math.round(lf[k].atAny)}%</strong></td>
-          <td>${Math.round(lf[k][0])}</td>
-          <td>${Math.round(lf[k][1])}</td>
-          <td>${Math.round(lf[k][2])}</td>
-          <td>${Math.round(lf[k][3])}</td>
-          <td>${Math.round(lf[k][4])}</td>
+          <td><strong>${UI.writeNum(lf[k].atAny)}%</strong></td>
+          <td>${UI.writeNum(lf[k][0])}</td>
+          <td>${UI.writeNum(lf[k][1])}</td>
+          <td>${UI.writeNum(lf[k][2])}</td>
+          <td>${UI.writeNum(lf[k][3])}</td>
+          <td>${UI.writeNum(lf[k][4])}</td>
         </tr>`
       )
       .join(`\n`);
@@ -345,7 +345,7 @@ const UI = {
     let formattedGuesses = guessWordsData
       .sort((a, b) => b.lfGuessScore - a.lfGuessScore)
       .slice(0, 100)
-      .map((wd) => `<span>${wd.word} | ${Math.round(wd.lfGuessScore)}</span>`)
+      .map((wd) => `<span>${wd.word} | ${UI.writeNum(wd.lfGuessScore)} | ${UI.writeNum(wd.filterPowerScore)}</span>`)
       .join("<br>");
     guessResultsEl.innerHTML = formattedGuesses;
   },
