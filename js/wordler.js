@@ -55,15 +55,11 @@ inputChange = () => {
     formData.yellow,
     formData.gray
   );
-  // only score if filtered TODO currently hacked at 1000 for dev/testing
-  // filtering all at ~10k words takes about 1 minute
+  
+  // Do Analysis
   let t0 = performance.now();
-  // Get Letter Frequency
   Data.letterFrequency = Score.letterFrequency(Data.matchWords);
   UI.writeLF(Data.letterFrequency);
-  // Data.matchWordsData = document.allScoredWords.filter((wd)=>possibleMatches.includes(wd.word));
-  // UI.writeMatches(Data.matchWordsData);
-  // console.log("Data.matchWordsData (short) DONE");
   Data.guessWordsData = Score.byLetterFrequency(
     Data.matchWords,
     Data.allWords,
@@ -71,25 +67,11 @@ inputChange = () => {
     formData.yellow,
     formData.gray
   );
-  Data.matchWordsData = Data.guessWordsData.filter((w) => w.possibleMatch);
-  console.log(Data.matchWordsData);
-  UI.writeMatches(Data.matchWordsData);
   UI.writeGuesses(Data.guessWordsData);
-  if (Data.matchWords.length < 50) {
-    // Data.matchWordsData = Score.scoreAllWords(possibleMatches);
-    // UI.writeMatches(Data.matchWordsData);
-    // console.log("Data.matchWordsData scoreAllWords DONE");
-    // Data.guessWordsData = Score.byFilterPotential(
-    //   possibleMatches.slice(0,100),
-    //   Data.allWords.slice(0,100)
-    // );
-    // console.log("Data.guessWordsData DONE");
-    // UI.writeGuesses(Data.guessWordsData);
-  }
+  Data.matchWordsData = Data.guessWordsData.filter((w) => w.possibleMatch);
+  UI.writeMatches(Data.matchWordsData);
   console.log("Exec Time: ", performance.now() - t0);
 };
-
-const Control = {};
 
 // Functions to filter to matching words
 const Filter = {
