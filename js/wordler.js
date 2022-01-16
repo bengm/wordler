@@ -37,7 +37,7 @@ const Data = {
     scoreFile.onreadystatechange = function () {
       if (scoreFile.readyState == 4 && scoreFile.status == 200) {
         // split results by newline; convert to lower case
-        document.allScoredWords = JSON.parse(scoreFile.responseText);
+        Data.allScoredWords = JSON.parse(scoreFile.responseText);
         // trigger the input change to refresh ui
         inputChange();
       }
@@ -59,8 +59,8 @@ inputChange = () => {
   // filtering all at ~10k words takes about 1 minute
   let t0 = performance.now();
   // Get Letter Frequency
-  document.letterFrequency = Score.letterFrequency(Data.matchWords);
-  UI.writeLF(document.letterFrequency);
+  Data.letterFrequency = Score.letterFrequency(Data.matchWords);
+  UI.writeLF(Data.letterFrequency);
   // Data.matchWordsData = document.allScoredWords.filter((wd)=>possibleMatches.includes(wd.word));
   // UI.writeMatches(Data.matchWordsData);
   // console.log("Data.matchWordsData (short) DONE");
