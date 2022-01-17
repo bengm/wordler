@@ -200,7 +200,6 @@ const Score = {
         w.lfGuessScore = w.lfGuessScore * 1.1;
       }
     });
-    con
     allWords.sort((a,b) => b.lfGuessScore - a.lfGuessScore);
   },
   letterFrequency: (words) => {
