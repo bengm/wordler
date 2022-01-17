@@ -118,11 +118,7 @@ const Score = {
     // For each possible target/guess word combo, how many possible matches would remain?
     // A resulting low matchCount means that it would narrow the list down to few words
     // Currently limiting it to top 15k comparisons
-    // 3000 -> 10 = 15000
-    // 15000 / 3000 = 5
-    // 15000 / 200 = 
     let iterations = Math.min(13000 / matchedWords.length, allWords.length)
-    console.log(iterations)
     for (let g=0; g < iterations; g+= 1) {
       // update UI progress along the way
       if (g % 100 == 0) {
@@ -204,6 +200,7 @@ const Score = {
         w.lfGuessScore = w.lfGuessScore * 1.1;
       }
     });
+    con
     allWords.sort((a,b) => b.lfGuessScore - a.lfGuessScore);
   },
   letterFrequency: (words) => {

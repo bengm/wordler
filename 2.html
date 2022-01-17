@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1.0"
+    />
+    <title>Wordler</title>
+
+    <!-- CSS  -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/terminal.css@0.7.2/dist/terminal.min.css"
+    />
+    <link
+      href="css/style.css"
+      type="text/css"
+      rel="stylesheet"
+      media="screen,projection"
+    />
+  </head>
+  <body class="terminal">
+    <!-- Top Title/Links -->
+    <div class="container">
+      <div class="terminal-nav">
+        <header class="terminal-logo">
+          <div class="logo terminal-prompt">
+            <a href="#" class="no-style">Wordler</a>
+          </div>
+        </header>
+        <nav class="terminal-menu">
+          <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+            <li property="itemListElement" typeof="ListItem">
+              <a
+                href="https://github.com/bengm/wordler"
+                property="item"
+                typeof="WebPage"
+                class="menu-item active"
+                ><span property="name">Source Code</span></a
+              ><meta property="position" content="1" />
+            </li>
+            <li property="itemListElement" typeof="ListItem">
+              <a
+                href="https://www.powerlanguage.co.uk/wordle/"
+                property="item"
+                typeof="WebPage"
+                class="menu-item"
+                ><span property="name">Wordle Game</span></a
+              ><meta property="position" content="2" />
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Intro Text -->
+    <section class="container">
+      <p>
+        A helper companion to the
+        <a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a> puzzle
+        game.
+      </p>
+    </section>
+    <hr />
+
+    <!-- Input Form -->
+    <section class="container">
+      <form action="#" data-form-type="other" id="wordForm">
+        <fieldset id="" class="tight-grid" style="max-width: 500px">
+          <legend>Your Guesses</legend>
+          <div id="guessFields"></div>
+        </fieldset>
+
+        <div class="form-group">
+          <br />
+          <input
+            class="btn btn-default"
+            type="submit"
+            role="button"
+            name="submit"
+            id="submit"
+            value="Find Matches"
+            data-form-type="action"
+          />
+        </div>
+      </form>
+    </section>
+    <hr />
+
+<!--   Results Section   -->
+
+<section class="container section grid">
+  <div>
+    <h2>Possible Matches <span id="numMatches"></span></h2>
+    <p><em>Sorted by letter frequency overlap.</em></p>
+    <div id="matches" class="result-list"></div>
+    <br /><br />
+  </div>
+  <div>
+    <h2>Guess Suggestions</h2>
+    <p><em>Narrow down possible matches.</em></p>
+    <div id="guesses" class="result-list"></div>
+    <br /><br />
+  </div>
+  <div>
+    <h2>Letter Frequency</h2>
+    <p><em>In remaining possible matches (as percent of word count)</em></p>
+    <table class="lfData">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Any</th>
+          <th>p1</th>
+          <th>p2</th>
+          <th>p3</th>
+          <th>p4</th>
+          <th>p5</th>
+        </tr>
+      </thead>
+      <tbody id="letterFrequency"></tbody>
+    </table>
+    <br /><br />
+  </div>
+</section>
+
+    <!-- Footer -->
+    <hr />
+    <footer class="container">
+      <p>Made by Ben Morris</p>
+      <p>
+        Note: if you'd like to try a Wordle clone that lets you play many games
+        in a row, try Jordan's
+        <a href="https://guessle.herokuapp.com/">Guessle</a> app.
+      </p>
+    </footer>
+
+    <!-- Load Script -->
+    <script src="js/wordler2.js"></script>
+  </body>
+</html>

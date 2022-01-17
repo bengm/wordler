@@ -60,3 +60,26 @@ table.lfData th,
 table.lfData td {
   border-color: lightgray;
 }
+
+
+input[type=text].letter {
+  border-bottom: none;
+}
+button.result {
+  padding: 0em;
+  width: 100%;
+  font-weight: bold;
+}
+
+button.result.gray {
+  background-color: lightgrey;
+  color: black;
+}
+button.result.yellow {
+  background-color: yellow;
+  color: black
+}
+button.result.green {
+  background-color: green;
+  color: white;
+}
