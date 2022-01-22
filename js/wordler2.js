@@ -100,21 +100,50 @@ const Form = {
       .join(" ");
   },
   letterInput: (guessNum, letterPosition, state) => {
+    let lTabIndex = 1 + guessNum * 2;
+    let bTabIndex = lTabIndex + 1;
     return `
       <div class="letter">
         <div class="form-group">
           <label for="letter_${guessNum}_${letterPosition}"></label>
-          <input id="letter_${guessNum}_${letterPosition}" value="${state.letter}" type="text" maxlength="1" class="letter" />
-          <button id="result_${guessNum}_${letterPosition}" value="${state.result}" type="text" class="btn result gray">gray</button>
+          <input  id="letter_${guessNum}_${letterPosition}" value="${state.letter}" type="text" tabindex="${lTabIndex}" maxlength="1" class="letter" />
+          <button id="result_${guessNum}_${letterPosition}" value="${state.result}" type="text" tabindex="${bTabIndex}" class="btn result gray">gray</button>
         </div>
       </div>
     `;
   },
   updateLetter: (e) => {
+    console.log(e);
     let g = Number(e.target.id[7]);
     let l = Number(e.target.id[9]);
+    if (e.key == "ArrowLeft") {
+      if (l !== 0) {
+        document.getElementById(`letter_${g}_${l - 1}`).focus();
+        document.getElementById(`letter_${g}_${l - 1}`).select();
+      }
+      return;
+    }
+    if (e.key == "Backspace") {
+      if (l !== 0) {
+        document.getElementById(`letter_${g}_${l - 1}`).value = "";
+        document.getElementById(`letter_${g}_${l - 1}`).focus();
+        document.getElementById(`letter_${g}_${l - 1}`).select();
+      }
+      return;
+    }
+    if (e.target.value.length == 0) {
+      return;
+    }
+
     e.target.value = e.target.value.toUpperCase();
     Data.guesses[g][l].letter = e.target.value.toLowerCase();
+    // tab to the next letter or the first result when the last letter
+    if (l == 4) {
+      document.getElementById(`result_${g}_0`).focus();
+    } else {
+      document.getElementById(`letter_${g}_${l + 1}`).focus();
+      document.getElementById(`letter_${g}_${l + 1}`).select();
+    }
   },
   toggleResult: (e) => {
     e.preventDefault();
@@ -142,7 +171,9 @@ const Form = {
   processSubmit: (e) => {
     e.preventDefault();
     e.stopPropagation();
-    Data.allWordsData = Data.allWords.map(word=> {return {word}});
+    Data.allWordsData = Data.allWords.map((word) => {
+      return { word };
+    });
     Data.matchedWords = Filter.all(Data.popularWords, Data.guesses);
     Data.letterFrequency = Score.letterFrequency(Data.matchedWords);
     UI.writeLF(Data.letterFrequency);
@@ -152,7 +183,9 @@ const Form = {
       Data.letterFrequency,
       Data.guesses
     );
-    Data.matchedWordsData = Data.clone(Data.allWordsData.filter((w) => w.possibleMatch));
+    Data.matchedWordsData = Data.clone(
+      Data.allWordsData.filter((w) => w.possibleMatch)
+    );
     UI.writeMatches(Data.matchedWordsData);
     UI.writeGuesses(Data.allWordsData);
   },
@@ -167,7 +200,7 @@ const Form = {
           .addEventListener("click", Form.toggleResult, false);
         document
           .getElementById(`letter_${l.guessNum}_${l.letterPosition}`)
-          .addEventListener("change", Form.updateLetter, false);
+          .addEventListener("keyup", Form.updateLetter, false);
       });
     });
   },
@@ -225,11 +258,15 @@ const UI = {
 
 const Score = {
   byLetterFrequency: (matchedWords, allWords, letterFreq, guesses) => {
-    let knownLetters = guesses.flat().map(l=> l.letter);
+    let knownLetters = guesses.flat().map((l) => l.letter);
     allWords.forEach((w) => {
       w.possibleMatch = matchedWords.includes(w.word);
       w.letters = w.word.split("").map((l, i) => {
-        return { letter: l, freqInPos: letterFreq[l][i], freqAtAny: letterFreq[l].atAny };
+        return {
+          letter: l,
+          freqInPos: letterFreq[l][i],
+          freqAtAny: letterFreq[l].atAny,
+        };
       });
       // Match Score
       // score possible match quality by weighting exact letters lots and any-position letters a bit

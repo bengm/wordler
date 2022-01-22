@@ -71,6 +71,13 @@ button.result {
   font-weight: bold;
 }
 
+button.result:hover, button.result:focus {
+  border-left-color: black;
+  border-right-color: black;
+  border-left-width: 5px;
+  border-right-width: 5px;
+}
+
 button.result.gray {
   background-color: lightgrey;
   color: black;
