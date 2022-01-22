@@ -16,7 +16,6 @@ const Data = {
         Data.allWords = wordFile.responseText
           .split("\n")
           .map((w) => w.toLowerCase());
-        // trigger the input change to refresh ui
       }
     };
     var popWordFile = new XMLHttpRequest();
@@ -28,7 +27,6 @@ const Data = {
         Data.popularWords = popWordFile.responseText
           .split("\n")
           .map((w) => w.toLowerCase());
-        // trigger the input change to refresh ui
       }
     };
     // pre-analyzed word list
@@ -39,8 +37,6 @@ const Data = {
       if (scoreFile.readyState == 4 && scoreFile.status == 200) {
         // split results by newline; convert to lower case
         Data.allWordsData = JSON.parse(scoreFile.responseText);
-        // trigger the input change to refresh ui
-        inputChange();
       }
     };
   },
@@ -200,7 +196,6 @@ const Score = {
         w.lfGuessScore = w.lfGuessScore * 1.1;
       }
     });
-    con
     allWords.sort((a,b) => b.lfGuessScore - a.lfGuessScore);
   },
   letterFrequency: (words) => {
