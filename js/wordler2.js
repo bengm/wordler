@@ -89,13 +89,12 @@ const Form = {
   writeInputs: () => {
     document.getElementById("guessFields").innerHTML = Form.wordInputs();
     Form.setResultListeners();
-    console.log("START");
   },
   wordInputs: () => {
     return Data.guesses
       .map((g, gi) => {
         let fields = g.map((l, li) => Form.letterInput(gi, li, l)).join(" ");
-        return `<div class="tight-grid"> ${fields} </div>`;
+        return `<div class="word-grid"> ${fields} </div>`;
       })
       .join(" ");
   },

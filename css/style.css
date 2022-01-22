@@ -61,13 +61,21 @@ table.lfData td {
   border-color: lightgray;
 }
 
-
+div.word-grid {
+  white-space: nowrap;
+}
+div.word-grid div.letter {
+  width: 4em;
+  display: inline-block;
+  white-space: normal;
+}
 input[type=text].letter {
   border-bottom: none;
+  width: 4em;
 }
 button.result {
   padding: 0em;
-  width: 100%;
+  width: 4em;
   font-weight: bold;
 }
 
