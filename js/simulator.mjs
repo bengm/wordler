@@ -4,7 +4,7 @@ import * as fs from "fs";
 
 let outfile = "sim_results.json";
 let allWords = fs
-  .readFileSync("./../words/popular5.txt")
+  .readFileSync("./../words/scrabble5.txt")
   .toString()
   .split("\n");
 let resultData = [];
