@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1.0"
+    />
+    <title>Wordler</title>
+
+    <!-- CSS  -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/terminal.css@0.7.2/dist/terminal.min.css"
+    />
+    <link
+      href="css/style.css"
+      type="text/css"
+      rel="stylesheet"
+      media="screen,projection"
+    />
+    <style>
+      span.res-green, span.res-gray, span.res-yellow {
+        width: 21px;
+        display: inline-block;
+        text-align: center;
+        margin: 2px;
+      }
+      span.res-green {
+        background-color: green;
+        color: white;
+        font-weight: bold;
+      }
+      span.res-gray {
+        background-color: lightgray;
+        color: black;
+      }
+      span.res-yellow {
+        background-color: yellow;
+        color: black;
+        font-weight: bold;
+      }
+      div.sim-guess-word {
+        white-space: nowrap;
+        display: inline-block;
+        margin: 2em;
+      }
+    </style>
+  </head>
+  <body class="terminal">
+    <!-- Top Title/Links -->
+    <div class="container">
+      <div class="terminal-nav">
+        <header class="terminal-logo">
+          <div class="logo terminal-prompt">
+            <a href="#" class="no-style">Wordler - Sim Results</a>
+          </div>
+        </header>
+      </div>
+    </div>
+
+    <!-- Intro Text -->
+    <section class="container">
+      <p>The page is reporting on running a simulator against the guessing algorithm. The simulator runs through the ~3000 most commonly used 5 letter words, and simulates playing the game to see how many rounds it takes.</p>
+    </section>
+
+    <hr />
+
+    <!-- analysis -->
+    <section class="container">
+      <h2>Summary Stats</h2>
+
+      <p><strong id="avg-guesses"></strong> guesses average</p>
+
+      <table>
+        <caption>Overall Performance Histogram</caption>
+        <thead>
+          <tr>
+            <th># Guesses</th>
+            <th>Count</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="hist-table"></tbody>
+      </table>
+
+      <table>
+        <caption>Performance by First Guess Score</caption>
+        <thead>
+          <tr>
+            <th># Guesses</th>
+            <th>Overall</th>
+            <th>1 Green</th>
+            <th>2 Green</th>
+            <th>Any Green</th>
+            <th>2 Hits (Green/Y)</th>
+            <th>3 Hits</th>
+            <th>4 Hits</th>
+          </tr>
+        </thead>
+        <tbody id="slices-table"></tbody>
+      </table>
+
+    </section>
+
+    <hr />
+
+    <!-- words dump -->
+    <section class="container">
+      <h2>Raw Guesses</h2>
+      <div id="raw-guesses">
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- Footer -->
+
+    <footer class="container">
+      <p>
+        <a
+          href="https://github.com/bengm/wordler"
+          property="item"
+          typeof="WebPage"
+          class="menu-item active"
+          >Source Code</a
+        >
+        |
+        <a
+          href="https://www.powerlanguage.co.uk/wordle/"
+          property="item"
+          typeof="WebPage"
+          class="menu-item"
+          >Wordle Game</a
+        >
+      </p>
+      <p>Made by Ben Morris</p>
+    </footer>
+
+    <!-- Load Script -->
+    <script src="js/simUI.js" type="module"></script>
+  </body>
+</html>
