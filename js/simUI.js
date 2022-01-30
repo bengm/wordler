@@ -106,15 +106,26 @@ const formatGuess = (g) => {
 const formatLetter = (l) => {
   return `<span class="res-${l.status}">${l.letter}</span>`;
 };
-let tableHTML = resultData
-  .map((r) => {
+let listHTML = resultData
+  .map((r,i) => {
+    let navAnchor = '';
+    let differentFirstLetter = i == 0 || resultData[i-1].targetWord[0] !== r.targetWord[0];
+    if (differentFirstLetter) {
+      navAnchor = `<h3 id="start-letter-${r.targetWord[0]}">${r.targetWord[0].toUpperCase()} (<a href="#letter-nav">top</a>)</h3>`
+    }
     return `
+  ${navAnchor}
   <div class="sim-guess-word">
     ${r.guesses.map(formatGuess).join("<br />")}
   </div>`;
   })
   .join("\n");
-document.getElementById("raw-guesses").innerHTML = tableHTML;
+document.getElementById("raw-guesses").innerHTML = listHTML;
+let letterNav = "abcdefghijklmnopqrstuvwxyz".split("").map(l=>{
+  return `
+  <a href="#start-letter-${l}">${l.toUpperCase()}</a>`
+}).join(" ");
+document.getElementById("letter-nav").innerHTML = letterNav;
 
 // {"targetWord":"aargh","guesses":[[{"position":0,"letter":"t","status":"gray"},{"position":1,"letter":"a","status":"green"},{"position":2,"letter":"r","status":"green"},{"position":3,"letter":"e","status":"gray"},{"position":4,"letter":"s","status":"gray"}],[{"position":0,"letter":"c","status":"gray"},{"position":1,"letter":"o","status":"gray"},{"position":2,"letter":"r","status":"green"},{"position":3,"letter":"k","status":"gray"},{"position":4,"letter":"y","status":"gray"}],[{"position":0,"letter":"a","status":"green"},{"position":1,"letter":"a","status":"green"},{"position":2,"letter":"r","status":"green"},{"position":3,"letter":"g","status":"green"},{"position":4,"letter":"h","status":"green"}]]}
 
